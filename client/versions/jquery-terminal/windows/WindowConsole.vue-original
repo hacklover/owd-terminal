@@ -8,7 +8,7 @@
 // jQuery Terminal integration
 
 import 'jquery.terminal/css/jquery.terminal.min.css'
-import Window from "~/core/components/window/Window";
+import Window from "@owd-client/core/src/components/window/Window";
 
 export default {
   name: "WindowConsole",
