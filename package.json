@@ -1,0 +1,15 @@
+{
+  "name": "owd-terminal",
+  "version": "2.0.0",
+  "dependencies": {
+    "jquery.terminal": "^2.17.4",
+    "local-echo": "^0.2.0",
+    "xterm": "^4.9.0"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/hacklover/owd-terminal",
+  "author": {
+    "name": "hacklover",
+    "url": "https://hacklover.net"
+  }
+}

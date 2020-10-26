@@ -13,26 +13,26 @@
 [Try it out](https://hacklover.net), just click on the console icon on the left menu
 
 ## Overview
-It's based on [jQuery Terminal Emulator](https://github.com/jcubic/jquery.terminal) because I use this library from the beginning.
+It's based on [jQuery Terminal](https://github.com/jcubic/jquery.terminal) because I use this library from the beginning of hacklover.net;
 Open Web Desktop is designed to support multiple terminals, other libraries like xterm and vue-terminal will be implemented later.
 
 ## Quick install
 - Copy the content of the `client` module folder into `owd-client/src/modules/terminal`
+- Copy the content of the `client/config` default config folder into `owd-client/config`
 - Install each module dependency manually with `npm install <dependency>`
 - Add the reference of this module into `owd-client/config/modules.json`
 
 ## Add commands
-This feature isn't provided by OWD Terminal but is already present in Open Web Desktop.
-You can add commands to any module adding `"commands": true` in `module.json` and providing a `commands.js` file like this:
+OWD Client globally supports terminal commands. You can define them from any OWD module by adding the method `loadCommands()` to the `module.class.js` file like this:
 
 ```js
-export default ({store, terminal}) => {
+loadCommands({store}) {
   return {
     'test': function (...args) {  
       this.echo('it works bruh')
     }
   }
-})
+}
 ```
 
 ## License

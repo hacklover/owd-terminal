@@ -1,23 +1,18 @@
-import Vue from 'vue'
+import 'jquery.terminal/css/jquery.terminal.min.css'
+import '../../assets/jquery.terminal.scss'
+import 'jquery.terminal'
 
-window.jQuery = require('jquery');
-require('jquery.terminal');
+window.jQuery = require('jquery')
 
-const $terminal = Vue.prototype.$terminal
-
-export default () => {
+export default function ({terminal}) {
   return {
     state: {
-      instance: null,
-      type: 'jquery-terminal'
+      instance: null
     },
 
     getters: {
       instance(state) {
         return state.instance
-      },
-      instanceType(state) {
-        return state.type
       }
     },
 
@@ -28,24 +23,24 @@ export default () => {
     },
 
     actions: {
-      terminalCreate({commit}, consoleId) {
+      create({commit}, consoleId) {
         // initialize jQuery Terminal
         const terminalElement = window.jQuery(`#${consoleId}`);
 
         // create jQuery Terminal
         const terminalInstance = terminalElement.terminal(
-          $terminal.commands,
+          terminal.commands,
           {
-            greetings: $terminal.greetings,
+            greetings: terminal.greetings,
             prompt: '> ',
             checkArity: false,
             onCommandNotFound: () => false,
             keydown: () => {
               // eslint-disable-next-line no-prototype-builtins
-              if ($terminal.events && $terminal.events.hasOwnProperty('keydown')) {
+              if (terminal.events && terminal.events.hasOwnProperty('keydown')) {
                 // run each keydown event
-                if ($terminal.events['keydown'].length > 0) {
-                  $terminal.events['keydown'].forEach(event => event(terminalInstance))
+                if (terminal.events['keydown'].length > 0) {
+                  terminal.events['keydown'].forEach(event => event(terminalInstance))
                 }
               }
             }
@@ -58,13 +53,16 @@ export default () => {
         // set instance
         commit('SET_INSTANCE', terminalInstance)
       },
-      terminalDestroy({getters}) {
+      destroy({getters}) {
         getters['instance'].destroy()
       },
-      terminalExec({getters}, command) {
+      exec({getters}, command) {
         getters['instance'].exec(command)
       },
-      terminalSetInput({getters}, command) {
+      reset({getters}) {
+        getters['instance'].reset()
+      },
+      setInput({getters}, command) {
         getters['instance'].set_command(command)
       }
     }
