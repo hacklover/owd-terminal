@@ -10,7 +10,7 @@
       background: none;
       user-select: text;
 
-      // spartan fix more width in console from mobile
+      // spartan fixes, more width in console from mobile
       @media (max-width: 560px) {
         margin-right: -22%;
       }
@@ -57,7 +57,7 @@
       .terminal-output > :not(.raw) a,
       .terminal-output > :not(.raw) div,
       .terminal-output > :not(.raw) span:not(.token):not(.inverted):not(.error):not(.emoji) {
-        font-size: 13px;
+        font-size: 12px;
         font-family: $fontMono;
         background: none;
 
@@ -78,22 +78,6 @@
 
         > :not(.raw) a[href]:hover {
           background-color: #63696f;
-        }
-      }
-
-      span[data-text="LIVE"] {
-        position: relative;
-        padding-left: 13px;
-
-        &:before {
-          position: absolute;
-          top: 2px;
-          left: 0;
-          width: 9px;
-          height: 9px;
-          border-radius: 50%;
-          background: #f5333d !important;
-          content: '';
         }
       }
 
