@@ -1,6 +1,6 @@
 {
   "name": "terminal",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "singleton": false,
   "autostart": true,
   "config": true,
@@ -9,7 +9,7 @@
       "name": "WindowConsole",
       "title": "Console",
       "icon": {
-        "name": "console-line",
+        "name": "mdi-console-line",
         "offset": {
           "y": -1
         }
@@ -27,11 +27,5 @@
         "z": 0
       }
     }
-  ],
-  "license": "MIT",
-  "homepage": "https://github.com/hacklover/owd-terminal",
-  "author": {
-    "name": "hacklover",
-    "url": "https://hacklover.net"
-  }
+  ]
 }
