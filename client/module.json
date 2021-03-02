@@ -1,6 +1,12 @@
 {
   "name": "terminal",
   "version": "2.0.1",
+  "license": "MIT",
+  "homepage": "https://github.com/hacklover/owd-terminal",
+  "author": {
+    "name": "hacklover",
+    "url": "https://github.com/hacklover"
+  },
   "singleton": false,
   "autostart": true,
   "config": true,
@@ -27,5 +33,8 @@
         "z": 0
       }
     }
-  ]
+  ],
+  "dependencies": {
+    "jquery.terminal": "^2.17.4"
+  }
 }
