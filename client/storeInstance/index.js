@@ -1,29 +1,46 @@
-import 'jquery.terminal/css/jquery.terminal.min.css'
-import '../assets/jquery.terminal.scss'
-import 'jquery.terminal'
-
-window.jQuery = require('jquery')
-
 export default function ({terminal}) {
   return {
     state: {
       instance: null
     },
 
-    getters: {
-      instance(state) {
-        return state.instance
-      }
-    },
-
     mutations: {
       SET_INSTANCE(state, instance) {
         state.instance = instance
+      },
+      SET_INSTANCE_FIT(state, localEcho) {
+        state.instanceFit = localEcho
+      },
+      SET_INSTANCE_LOCAL_ECHO(state, localEcho) {
+        state.instanceLocalEcho = localEcho
       }
     },
 
     actions: {
-      create({commit}, consoleId) {
+      /**
+       * Color helper
+       * todo move to owd-terminal module
+       *
+       * @param text
+       * @param color
+       * @param textFormat
+       * @returns {string}
+       */
+      textColor(text, color, textFormat) {
+        if (!this.validTextFormat.includes(textFormat)) {
+          textFormat = ''
+        } else {
+          textFormat = '!' + textFormat
+        }
+
+        if (!this.validColors.includes(color)) {
+          color = ''
+        }
+
+        return '[[' + textFormat + ';' + color + ';]' + text + ']'
+      },
+
+      async create({commit, rootGetters}, consoleId) {
         // initialize jQuery Terminal
         const terminalElement = window.jQuery(`#${consoleId}`);
 
@@ -31,7 +48,7 @@ export default function ({terminal}) {
         const terminalInstance = terminalElement.terminal(
           terminal.commands,
           {
-            greetings: terminal.greetings,
+            greetings: rootGetters['terminal-jcubic/greeting'].replace(/\n/g, '\n\r'),
             prompt: '> ',
             checkArity: false,
             onCommandNotFound: () => false,
@@ -47,23 +64,19 @@ export default function ({terminal}) {
           }
         );
 
-        // unfocus it
-        terminalInstance.focus(false)
-
-        // set instance
         commit('SET_INSTANCE', terminalInstance)
       },
-      destroy({getters}) {
-        getters['instance'].destroy()
+      destroy({state}) {
+        state.instance.destroy()
       },
-      exec({getters}, command) {
-        getters['instance'].exec(command)
+      exec({state}, command) {
+        state.instance.exec(command)
       },
-      reset({getters}) {
-        getters['instance'].reset()
+      reset({state}) {
+        state.instance.reset()
       },
-      setInput({getters}, command) {
-        getters['instance'].set_command(command)
+      setInput({state}, command) {
+        state.instance.set_command(command)
       }
     }
   }

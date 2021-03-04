@@ -38,5 +38,8 @@ loadCommands({store}) {
 ## Dependencies
 - jquery.terminal
 
+## Compatibility
+- Open Web Desktop client v2.0.0-alpha.2
+
 ## License
 This project is released under the [MIT License](LICENSE)

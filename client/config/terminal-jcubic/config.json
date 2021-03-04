@@ -1,0 +1,9 @@
+{
+  "greeting": "{app-name} console ‒ Version {app-version}\nCopyright (c) {app-year} {app-website}\n\nWelcome, guest. Type {default-command} to list available commands\n\n",
+  "options": {
+    "rendererType": "dom",
+    "cursorBlink": true,
+    "theme": {},
+    "fontSize": 13
+  }
+}

@@ -1,11 +1,18 @@
-import {Module} from '@owd-client/core'
+import {ModuleApp} from '@owd-client/core'
 
 import terminalStore from './store'
 import terminalStoreInstance from './storeInstance/index';
 
-export default class TerminalModule extends Module {
+export default class TerminalModule extends ModuleApp {
   constructor(context) {
     super(context)
+  }
+
+  loadAssets() {
+    require('jquery.terminal/css/jquery.terminal.min.css')
+    require('jquery.terminal')
+
+    window.jQuery = require('jquery')
   }
 
   loadStore() {
@@ -18,11 +25,11 @@ export default class TerminalModule extends Module {
 
   loadCommands({store}) {
     return {
-      'help': function () {
+      'test-jcubic': function () {
         this.echo('\nHello there!\n')
       },
       'console': function () {
-        store.dispatch('core/windows/windowCreate', 'WindowConsole');
+        store.dispatch('core/window/windowCreate', 'WindowConsole');
       }
     }
   }

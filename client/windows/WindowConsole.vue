@@ -1,6 +1,10 @@
 <template>
-  <Window :title="data.title" :window="data">
-    <div :id="storeName" class="terminal" />
+  <Window
+    :window="window"
+    @open="onOpen"
+    @restore="onRestore"
+  >
+    <div :id="window.uniqueName" class="terminal" />
   </Window>
 </template>
 
@@ -8,66 +12,40 @@
   import Window from "@owd-client/core/src/components/window/Window";
 
   export default {
-    name: "WindowConsole",
     components: {Window},
-    data() {
-      return {
-        storeName: `${this.data.module.moduleInfo.name}-${this.data.uniqueID}`
-      }
-    },
     props: {
-      data: Object
+      window: Object
     },
-    watch: {
-      // when window closes
-      'data.storage.closed': function (val) {
-        if (val === true) {
-          this.$store.dispatch(`${this.storeName}/reset`, this.storeName);
-        }
-      }
-    },
-    computed: {
-      instance() {
-        return this.storeName ? this.$store.getters[this.storeName+'/instance'] : undefined
+    methods: {
+      onOpen() {
+        setTimeout(() => {
+          this.$store.dispatch(`${this.window.uniqueName}/create`, this.window.uniqueName)
+        }, 500)
+      },
+      onRestore() {
+        this.$store.dispatch(`${this.window.uniqueName}/create`, this.window.uniqueName)
       }
     },
     mounted() {
-      this.$store.dispatch(`${this.storeName}/create`, this.storeName);
+      this.$store.dispatch(`${this.window.uniqueName}/create`, this.window.uniqueName)
     }
   }
 </script>
 
 <style lang="scss">
-  #app.is-windows {
-    font-size: 14px;
-
-    #window-console {
-      .terminal {
-        .cmd,
-        .cmd div,
-        .cmd span:not(.token):not(.emoji),
-        .terminal,
-        .terminal-output>:not(.raw) a,
-        .terminal-output>:not(.raw) div,
-        .terminal-output>:not(.raw) span:not(.token):not(.inverted):not(.error):not(.emoji) {
-          font-size: 14px;
-        }
-      }
-    }
-  }
-
-  #window-console {
+  .owd-window-console {
     .v-progress-linear {
       top: initial;
     }
 
     .terminal {
       height: 100%;
-      padding: 0;
+      padding: 12px;
       background: none;
       user-select: text;
+      background: black;
 
-      // spartan fix more width in console from mobile
+      // spartan fixes, more width in console from mobile
       @media (max-width: 560px) {
         margin-right: -22%;
       }
@@ -114,6 +92,7 @@
       .terminal-output > :not(.raw) a,
       .terminal-output > :not(.raw) div,
       .terminal-output > :not(.raw) span:not(.token):not(.inverted):not(.error):not(.emoji) {
+        font-size: 12px;
         font-family: $fontMono;
         background: none;
 
@@ -134,22 +113,6 @@
 
         > :not(.raw) a[href]:hover {
           background-color: #63696f;
-        }
-      }
-
-      span[data-text="LIVE"] {
-        position: relative;
-        padding-left: 13px;
-
-        &:before {
-          position: absolute;
-          top: 2px;
-          left: 0;
-          width: 9px;
-          height: 9px;
-          border-radius: 50%;
-          background: #f5333d !important;
-          content: '';
         }
       }
 

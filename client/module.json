@@ -1,18 +1,18 @@
 {
-  "name": "terminal",
-  "version": "2.0.1",
+  "name": "terminal-jcubic",
+  "version": "2.0.0",
   "license": "MIT",
-  "homepage": "https://github.com/hacklover/owd-terminal",
+  "homepage": "https://github.com/hacklover/owd-terminal-jcubic",
   "author": {
     "name": "hacklover",
     "url": "https://github.com/hacklover"
   },
   "singleton": false,
-  "autostart": true,
   "config": true,
   "windows": [
     {
       "name": "WindowConsole",
+      "category": "system-tools",
       "title": "Console",
       "icon": {
         "name": "mdi-console-line",
@@ -20,21 +20,20 @@
           "y": -1
         }
       },
-      "window": {
-        "menu": true,
-        "closed": true,
-        "minimized": false,
-        "resizable": true,
-        "maximizable": true,
+      "menu": true,
+      "minimized": false,
+      "resizable": true,
+      "maximizable": true,
+      "noContentSpacing": true,
+      "size": {
         "width": 480,
-        "height": 320,
+        "height": 320
+      },
+      "position": {
         "x": -1,
         "y": 0,
         "z": 0
       }
     }
-  ],
-  "dependencies": {
-    "jquery.terminal": "^2.17.4"
-  }
+  ]
 }
