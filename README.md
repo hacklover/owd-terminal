@@ -9,9 +9,6 @@
     <a href="https://hacklover.net/discord"><img src="https://img.shields.io/badge/chat-on%20discord-7289da.svg" alt="Join us on Discord" /></a>
 </p>
 
-## Demo
-[Try it out](https://hacklover.net/client), just click on the console icon on the left menu
-
 ## Overview
 It's based on [jQuery Terminal](https://github.com/jcubic/jquery.terminal) because I use this library from the beginning of hacklover.net;
 Open Web Desktop is designed to support multiple terminals, other libraries like xterm and vue-terminal may be implemented later.
