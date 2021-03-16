@@ -17,7 +17,7 @@
       "icon": {
         "name": "mdi-console-line",
         "offset": {
-          "y": -1
+          "y": -2
         }
       },
       "menu": true,
